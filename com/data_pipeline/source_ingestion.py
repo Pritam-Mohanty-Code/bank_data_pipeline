@@ -102,3 +102,5 @@ if __name__ == '__main__':
             ut.write_to_s3(cust_addr, output_path)
 
 # spark-submit --packages "mysql:mysql-connector-java:8.0.15" dataframe/ingestion/others/systems/mysql_df.py
+# spark-submit --packages "mysql:mysql-connector-java:8.0.15" com/data_pipeline/source_ingestion.py
+# spark-submit --packages “org.apache.hadoop:hadoop-aws:2.7.4,mysql:mysql-connector-java:8.0.15,com.springml:spark-sftp_2.11:1.1.1,org.mongodb.spark:mongo-spark-connector_2.11:2.4.1” com/data_pipeline/source_ingestion.py
