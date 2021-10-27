@@ -1,7 +1,7 @@
 source_list:
 ##  - CP
-  - SB
-##  - OL
+##  - SB
+  - OL
 ##  - ADDR
 
 target_list:
@@ -15,7 +15,7 @@ OL:
   sftp_conf:
       filetype: csv
       delimiter: |
-      directory: /home/ubuntu/data
+      directory: /home/ubuntu/outbound_folder
       filename: receipts_delta_GBR_14_10_2017.csv
 
 SB:
