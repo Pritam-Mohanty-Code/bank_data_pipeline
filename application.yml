@@ -30,8 +30,8 @@ CP:
 
 ADDR:
   mongodb_config:
-    database: school
-    collection: students
+    database: customer_profile
+    collection: address
 
 REGIS_DIM:
   tableName: DATAMART.REGIS_DIM

@@ -89,18 +89,18 @@ if __name__ == '__main__':
                 .option("database", src_conf["mongodb_config"]["database"])\
                 .option("collection", src_conf["mongodb_config"]["collection"])\
                 .load()
-            #cust_addr = cust_addr\
-            #    .select(col("consumer_id"),
-            #            col("mobile-no").alias("mobile"),
-            #            col("address.street").alias("address"),
-            #            col("address.city").alias("city"),
-            #            col("address.state").alias("state")
-            #            )
+            cust_addr = cust_addr\
+                .select(col("consumer_id"),
+                        col("mobile-no").alias("mobile"),
+                        col("address.street").alias("address"),
+                        col("address.city").alias("city"),
+                        col("address.state").alias("state")
+                        )
             # "consumer_id":"I034867789V","address":{"street":"aca","city":"bangalore","state":"karnataka"},"mobile-no":"7789327282"}
-            #cust_addr = cust_addr.withColumn("ins_dt", current_date())
+            cust_addr = cust_addr.withColumn("ins_dt", current_date())
             cust_addr.show()
-            #ut.write_to_s3(cust_addr, output_path)
+            ut.write_to_s3(cust_addr, output_path)
 
 # spark-submit --packages "mysql:mysql-connector-java:8.0.15" dataframe/ingestion/others/systems/mysql_df.py
-# spark-submit --packages "com.springml:spark-sftp_2.11:1.1.1" com/data_pipeline/source_ingestion.py
-# spark-submit --packages “org.apache.hadoop:hadoop-aws:2.7.4,mysql:mysql-connector-java:8.0.15,com.springml:spark-sftp_2.11:1.1.1,org.mongodb.spark:mongo-spark-connector_2.11:2.4.1” com/data_pipeline/source_ingestion.py
+# spark-submit --packages "org.mongodb.spark:mongo-spark-connector_2.11:2.4.1" com/data_pipeline/source_ingestion.py
+# spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4,mysql:mysql-connector-java:8.0.15,com.springml:spark-sftp_2.11:1.1.1,org.mongodb.spark:mongo-spark-connector_2.11:2.4.1" com/data_pipeline/source_ingestion.py
