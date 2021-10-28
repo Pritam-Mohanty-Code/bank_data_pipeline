@@ -86,7 +86,7 @@ if __name__ == '__main__':
                 .read\
                 .format("com.mongodb.spark.sql.DefaultSource")\
                 .option("database", src_conf["mongodb_config"]["database"])\
-                .option("collection", src_conf["mongodb_config"]["collection"])\
+                .option("collection", "address")\
                 .load()
             cust_addr = cust_addr\
                 .select(col("consumer_id"),
