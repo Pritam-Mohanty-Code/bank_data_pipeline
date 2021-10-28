@@ -1,9 +1,8 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
-import utils.utilities as ut
+from com import utils as ut
 import yaml
 import os.path
-from pyspark.sql.types import StructType, IntegerType, BooleanType, DoubleType
 
 if __name__ == '__main__':
     current_dir = os.path.abspath(os.path.dirname(__file__))
