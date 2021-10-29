@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
-from com.data_pipeline import utils as ut
+from com import utils as ut
 import yaml
 import os.path
 
