@@ -37,8 +37,8 @@ if __name__ == '__main__':
         if tgt == 'REGIS_DIM':
             print('Creating REGIS_DIM table data')
             spark.read\
-                .parquet(staging_path + '/' + tgt_conf['source_data'])\
-                .createOrReplaceTempView(tgt_conf['source_data'])
+                .parquet(staging_path + '/' + tgt_conf['sourceData'])\
+                .createOrReplaceTempView(tgt_conf['sourceData'])
 
             regis_dim_df = spark.sql(tgt_conf['loadingQuery'])
             regis_dim_df.show()
@@ -52,10 +52,10 @@ if __name__ == '__main__':
         elif tgt == 'CHILD_DIM':
             print('Creating CHILD_DIM table data')
             #source_data = tgt_conf[]
-            for src in tgt_conf['source_data']:
+            for src in tgt_conf['sourceData']:
                 spark.read\
-                    .parquet(staging_path + '/' + tgt_conf['source_data'])\
-                    .createOrReplaceTempView(tgt_conf['source_data'])
+                    .parquet(staging_path + '/' + tgt_conf['sourceData'])\
+                    .createOrReplaceTempView(tgt_conf['sourceData'])
 
             child_dim_df = spark.sql(tgt_conf['loadingQuery'])
             child_dim_df.show()
