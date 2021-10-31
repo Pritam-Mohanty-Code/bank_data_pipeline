@@ -39,9 +39,16 @@ if __name__ == '__main__':
             #spark.read\
             #    .parquet(staging_path + '/' + tgt_conf['source_data'])\
             #    .createOrReplaceTempView(tgt_conf['source_data'])
-            spark.read\
-                .parquet(staging_path + '/' + "CP")\
-                .createOrReplaceTempView("CP")
+            src_list = tgt_conf['source_data']
+            for src in src_list:
+                file_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_dir"] + "/" + src
+                src_df = spark.sql("select * from parquet.'{}'".format(file_path))
+                src_df.printSchema()
+                src_df.show(5, False)
+                src_df.createOrReplaceTempView(src)
+
+            print("REGIS_DIM")
+
 
             #print('temp view created')
 
