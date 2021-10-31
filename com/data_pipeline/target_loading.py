@@ -39,7 +39,9 @@ if __name__ == '__main__':
             for src in tgt_conf['sourceData']:
                 print('Creating REGIS_DIM table data***')
                 print(staging_path + '/' + src)
-                src_df = spark.read.parquet(staging_path + '/' + src)
+                #src_df = spark.read.load(staging_path + '/' + src).repartition(5)
+                file_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_dir"] + '/' + src
+                src_df = spark.read.load(path='file_path', format='parquet')
                 print('Creating REGIS_DIM table data****')
                 src_df.printSchema()
                 print('Creating REGIS_DIM table data*****')
