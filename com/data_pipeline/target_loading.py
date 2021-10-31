@@ -41,7 +41,8 @@ if __name__ == '__main__':
             #    .createOrReplaceTempView(tgt_conf['source_data'])
             src_list = tgt_conf['source_data']
             for src in src_list:
-                file_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_dir"] + "/" + src
+                #file_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_dir"] + "/" + "CP"
+                file_path = "s3a://data-stg-dir/staging/CP"
                 src_df = spark.sql("select * from parquet.'{}'".format(file_path))
                 src_df.printSchema()
                 src_df.show(5, False)
