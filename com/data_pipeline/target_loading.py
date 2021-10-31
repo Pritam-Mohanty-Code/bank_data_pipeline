@@ -51,7 +51,7 @@ if __name__ == '__main__':
 
         elif tgt == 'CHILD_DIM':
             print('Creating CHILD_DIM table data')
-            source_data = tgt_conf[]
+            #source_data = tgt_conf[]
             for src in tgt_conf['source_data']:
                 spark.read\
                     .parquet(staging_path + '/' + tgt_conf['source_data'])\
