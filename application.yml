@@ -35,7 +35,8 @@ ADDR:
 
 REGIS_DIM:
   tableName: DWH.REGIS_DIM
-  sourceData: CP
+  sourceData:
+    - CP
   loadingQuery: >
           SELECT
             MONOTONICALLY_INCREASING_ID() AS REGIS_KEY, REGIS_CNSM_ID AS CNSM_ID,REGIS_CTY_CODE AS CTY_CODE,
@@ -51,7 +52,8 @@ REGIS_DIM:
              ) CP
 CHILD_DIM:
   tableName: DWH.CHILD_DIM
-  sourceData: CP
+  sourceData:
+    - CP
   loadingQuery: >
       SELECT
           MONOTONICALLY_INCREASING_ID() CHILD_KEY, REGIS_CNSM_ID, REGIS_CTY_CODE, CHILD_ID, CHILD_NB,
