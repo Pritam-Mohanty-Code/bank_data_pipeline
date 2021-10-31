@@ -46,12 +46,12 @@ if __name__ == '__main__':
             regis_dim_df = spark.sql(tgt_conf['loadingQuery'])
             regis_dim_df.show()
             jdbc_url = ut.get_redshift_jdbc_url(app_secret)
-
+            print('Creating REGIS_DIM table data++++++++++++++++++++')
             ut.write_to_redshift(regis_dim_df.coalesce(1),
                                  jdbc_url,
                                  "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/temp",
                                  tgt_conf['tableName'])
-
+            print('Creating REGIS_DIM table data+++========+++++++++')
         elif tgt == 'CHILD_DIM':
             print('Creating CHILD_DIM table data')
             #source_data = tgt_conf[]
