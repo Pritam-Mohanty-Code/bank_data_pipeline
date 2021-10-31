@@ -1,8 +1,8 @@
 source_list:
-##  - CP
-##  - SB
-##  - OL
-##  - ADDR
+  - CP
+  - SB
+#  - OL
+#  - ADDR
 
 target_list:
   - REGIS_DIM
@@ -46,8 +46,8 @@ REGIS_DIM:
         REGIS_LTY_ID, REGIS_DATE, REGIS_CHANNEL, REGIS_GENDER, REGIS_CITY, INS_DT
       FROM
         CP
-      WHERE
-        INS_DT = CURRENT_DATE
+      #WHERE
+       # INS_DT = CURRENT_DATE
       ) CP
 CHILD_DIM:
   tableName: DWH.CHILD_DIM
