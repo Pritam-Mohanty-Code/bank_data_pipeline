@@ -36,22 +36,10 @@ if __name__ == '__main__':
         s3_temp_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/temp"
         if tgt == 'REGIS_DIM':
             print('Creating REGIS_DIM table data')
-            #spark.read\
-            #    .parquet(staging_path + '/' + tgt_conf['source_data'])\
-            #    .createOrReplaceTempView(tgt_conf['source_data'])
-            src_list = tgt_conf['source_data']
-            for src in src_list:
-                #file_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_dir"] + "/" + "CP"
-                file_path = "s3a://data-stg-dir/staging/CP"
-                src_df = spark.sql("select * from parquet.'{}'".format(file_path))
-                src_df.printSchema()
-                src_df.show(5, False)
-                src_df.createOrReplaceTempView(src)
-
-            print("REGIS_DIM")
-
-
-            #print('temp view created')
+            for src in tgt_conf['source_data']:
+                spark.read\
+                    .parquet(staging_path + '/' + tgt_conf['source_data'])\
+                    .createOrReplaceTempView(tgt_conf['source_data'])
 
             regis_dim_df = spark.sql(tgt_conf['loadingQuery'])
             regis_dim_df.show()
@@ -64,9 +52,10 @@ if __name__ == '__main__':
 
         elif tgt == 'CHILD_DIM':
             print('Creating CHILD_DIM table data')
-            spark.read\
-                .parquet(staging_path + '/' + tgt_conf['source_data'])\
-                .createOrReplaceTempView(tgt_conf['source_data'])
+            for src in tgt_conf['source_data']:
+                spark.read\
+                    .parquet(staging_path + '/' + tgt_conf['source_data'])\
+                    .createOrReplaceTempView(tgt_conf['source_data'])
 
             child_dim_df = spark.sql(tgt_conf['loadingQuery'])
             child_dim_df.show()
