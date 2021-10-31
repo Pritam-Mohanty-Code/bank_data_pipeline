@@ -31,7 +31,7 @@ if __name__ == '__main__':
     tgt_list = app_conf['target_list']
 
     for tgt in tgt_list:
-        tgt_conf = tgt_conf[tgt]
+        tgt_conf = app_conf[tgt]
 
         if tgt == 'REGIS_DIM':
             src_list = tgt_conf['source_data']
