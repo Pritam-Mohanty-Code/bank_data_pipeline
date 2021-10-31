@@ -38,8 +38,8 @@ if __name__ == '__main__':
             print('Creating REGIS_DIM table data')
             for src in tgt_conf['sourceData']:
                 spark.read\
-                    .parquet(staging_path + '/' + tgt_conf[src])\
-                    .createOrReplaceTempView(tgt_conf[src])
+                    .parquet(staging_path + '/' + src)\
+                    .createOrReplaceTempView(src)
 
             regis_dim_df = spark.sql(tgt_conf['loadingQuery'])
             regis_dim_df.show()
@@ -55,8 +55,8 @@ if __name__ == '__main__':
             #source_data = tgt_conf[]
             for src in tgt_conf['sourceData']:
                 spark.read\
-                    .parquet(staging_path + '/' + tgt_conf[src])\
-                    .createOrReplaceTempView(tgt_conf[src])
+                    .parquet(staging_path + '/' + src)\
+                    .createOrReplaceTempView(src)
 
             child_dim_df = spark.sql(tgt_conf['loadingQuery'])
             child_dim_df.show()
