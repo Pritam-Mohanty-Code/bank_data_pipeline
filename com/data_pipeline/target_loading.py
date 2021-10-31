@@ -35,12 +35,13 @@ if __name__ == '__main__':
         tgt_conf = app_conf[tgt]
         s3_temp_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/temp"
         if tgt == 'REGIS_DIM':
-            print('Creating REGIS_DIM table data+++++++++++++++++++++++++++')
-            testDF = spark.read\
-                .parquet(staging_path + '/' + tgt_conf['source_data'])
-                #.createOrReplaceTempView(tgt_conf['source_data'])
-            testDF.show()
-            print('Creating REGIS_DIM table data**************************')
+            print('Creating REGIS_DIM table data')
+            spark.read\
+                .parquet(staging_path + '/' + tgt_conf['source_data'])\
+                .createOrReplaceTempView(tgt_conf['source_data'])
+
+            #print('temp view created')
+
             regis_dim_df = spark.sql(tgt_conf['loadingQuery'])
             regis_dim_df.show()
             jdbc_url = ut.get_redshift_jdbc_url(app_secret)
