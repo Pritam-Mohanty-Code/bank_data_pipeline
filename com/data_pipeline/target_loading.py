@@ -48,7 +48,7 @@ if __name__ == '__main__':
                 src_df.show(5, False)
                 print('Creating REGIS_DIM table data******')
                 src_df.createOrReplaceTempView(src)
-
+                print('Creating REGIS_DIM table data*******')
             regis_dim_df = spark.sql(tgt_conf['loadingQuery'])
             regis_dim_df.show()
             jdbc_url = ut.get_redshift_jdbc_url(app_secret)
