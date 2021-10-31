@@ -38,6 +38,7 @@ if __name__ == '__main__':
             print('Creating REGIS_DIM table data')
             for src in tgt_conf['sourceData']:
                 print('Creating REGIS_DIM table data***')
+                print(staging_path + '/' + src)
                 src_df = spark.read.parquet(staging_path + '/' + src)
                 print('Creating REGIS_DIM table data****')
                 src_df.printSchema()
