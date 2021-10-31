@@ -54,9 +54,10 @@ if __name__ == '__main__':
             print('Creating CHILD_DIM table data')
             #source_data = tgt_conf[]
             for src in tgt_conf['sourceData']:
-                spark.read\
-                    .parquet(staging_path + '/' + src)\
-                    .createOrReplaceTempView(src)
+                src_df = spark.read.parquet(staging_path + '/' + src)
+                src_df.printSchema()
+                src_df.show(5, False)
+                src_df.createOrReplaceTempView(src)
 
             child_dim_df = spark.sql(tgt_conf['loadingQuery'])
             child_dim_df.show()
