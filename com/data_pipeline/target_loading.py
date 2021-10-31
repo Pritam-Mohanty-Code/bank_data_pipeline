@@ -36,10 +36,9 @@ if __name__ == '__main__':
         s3_temp_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/temp"
         if tgt == 'REGIS_DIM':
             print('Creating REGIS_DIM table data')
-            for src in tgt_conf['source_data']:
-                spark.read\
-                    .parquet(staging_path + '/' + tgt_conf['source_data'])\
-                    .createOrReplaceTempView(tgt_conf['source_data'])
+            spark.read\
+                .parquet(staging_path + '/' + tgt_conf['source_data'])\
+                .createOrReplaceTempView(tgt_conf['source_data'])
 
             regis_dim_df = spark.sql(tgt_conf['loadingQuery'])
             regis_dim_df.show()
