@@ -1,12 +1,12 @@
 source_list:
   - CP
-#  - SB
-#  - OL
-#  - ADDR
+  - SB
+  - OL
+  - ADDR
 
 target_list:
   - REGIS_DIM
-##  - CHILD_DIM
+  - CHILD_DIM
 ##  - RTL_TXN_FCT
 
 datamart_schema: DWH
@@ -48,7 +48,7 @@ REGIS_DIM:
                CP
              #WHERE
               # INS_DT = CURRENT_DATE
-             ) CP2
+             ) CP
 CHILD_DIM:
   tableName: DWH.CHILD_DIM
   source_data: CP
