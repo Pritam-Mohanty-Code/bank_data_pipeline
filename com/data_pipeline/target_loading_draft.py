@@ -28,20 +28,31 @@ if __name__ == '__main__':
     hadoop_conf.set("fs.s3a.access.key", app_secret["s3_conf"]["access_key"])
     hadoop_conf.set("fs.s3a.secret.key", app_secret["s3_conf"]["secret_access_key"])
 
-    src_list = app_conf['source_list']
+    tgt_list = app_conf['target_list']
 
-    for src in src_list:
-        src_conf = app_conf[src]
+    for tgt in tgt_list:
+        tgt_conf = tgt_conf[tgt]
 
-    cp_df = ut.read.from_s3(spark, src_conf)
+        if tgt == 'REGIS_DIM':
+            src_list = tgt_conf['source_data']
+            for src in src_list:
+                file_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_dir"] + "/" + src
+                src_df = spark.sql("select * from parquet.'{}'".format(file_path))
+                src_df.printSchema()
+                src_df.show(5, False)
+                src_df.createOrReplaceTempView(src)
 
-    spark.sql("""
-                SELECT
-               DISTINCT REGIS_CNSM_ID, CAST(REGIS_CTY_CODE AS SMALLINT), CAST(REGIS_ID AS INTEGER),
-               REGIS_LTY_ID, REGIS_DATE, REGIS_CHANNEL, REGIS_GENDER, REGIS_CITY, INS_DT
-             FROM
-               CP
-             WHERE
-             INS_DT = CURRENT_DATE
-             """) \
-        .show(5, False)
+            print("REGIS_DIM")
+
+            regis_dim = spark.sql(app_conf["REGIS_DIM"]["loadingQuery"])
+            regis_dim.show(5, False)
+
+            regis_dim.write_to_redshist(regis_dim.coalesce(1),
+                                        app_secret,
+                                        "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/temp",
+                                        tgt_conf['tableName'])
+
+        elif tgt == 'CHILD_DIM':
+            print('CHILD_DIM')
+
+
