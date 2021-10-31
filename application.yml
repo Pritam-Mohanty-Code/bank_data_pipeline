@@ -2,14 +2,14 @@ source_list:
 ##  - CP
 ##  - SB
 ##  - OL
-  - ADDR
+##  - ADDR
 
 target_list:
-  - REGIS_DIM
+##  - REGIS_DIM
   - CHILD_DIM
-  - RTL_TXN_FCT
+##  - RTL_TXN_FCT
 
-datamart_schema: DATAMART
+datamart_schema: DWH
 
 OL:
   sftp_conf:
@@ -34,7 +34,7 @@ ADDR:
     collection: address
 
 REGIS_DIM:
-  tableName: DATAMART.REGIS_DIM
+  tableName: DWH.REGIS_DIM
   source_data: CP
   loadingQuery: >
     SELECT
@@ -50,7 +50,7 @@ REGIS_DIM:
         INS_DT = CURRENT_DATE
       ) CP
 CHILD_DIM:
-  tableName: DATAMART.CHILD_DIM
+  tableName: DWH.CHILD_DIM
   source_data: CP
   loadingQuery: >
       SELECT
@@ -68,7 +68,7 @@ RTL_TXN_FCT:
     - SB
     - OL
   target_src_table: REGIS_DIM
-  tableName: DATAMART.RTL_TXN_FCT
+  tableName: DWH.RTL_TXN_FCT
   loadingQuery: >
       SELECT
           MONOTONICALLY_INCREASING_ID() AS RTL_TXN_KEY, CAST(TXN.APP_TRANSACTION_ID AS STRING)AS TXN_ID, SIZE(split(REC.PRODUCTS, ',')) AS TXN_ITEM_QTY,
