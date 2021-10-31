@@ -35,7 +35,7 @@ ADDR:
 
 REGIS_DIM:
   tableName: DWH.REGIS_DIM
-  source_data: CP
+  sourceData: CP
   loadingQuery: >
           SELECT
             MONOTONICALLY_INCREASING_ID() AS REGIS_KEY, REGIS_CNSM_ID AS CNSM_ID,REGIS_CTY_CODE AS CTY_CODE,
@@ -51,7 +51,7 @@ REGIS_DIM:
              ) CP
 CHILD_DIM:
   tableName: DWH.CHILD_DIM
-  source_data: CP
+  sourceData: CP
   loadingQuery: >
       SELECT
           MONOTONICALLY_INCREASING_ID() CHILD_KEY, REGIS_CNSM_ID, REGIS_CTY_CODE, CHILD_ID, CHILD_NB,
@@ -64,7 +64,7 @@ CHILD_DIM:
           INS_DT = '2021-06-26' AND CHILD_ID IS NOT NULL
       ) CP
 RTL_TXN_FCT:
-  source_data:
+  sourceData:
     - SB
     - OL
   target_src_table: REGIS_DIM

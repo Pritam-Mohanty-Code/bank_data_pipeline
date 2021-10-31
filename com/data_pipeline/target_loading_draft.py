@@ -34,7 +34,11 @@ if __name__ == '__main__':
         tgt_conf = app_conf[tgt]
 
         if tgt == 'REGIS_DIM':
-            src_list = tgt_conf['source_data']
+            src_list = tgt_conf['sourceData']
+            print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+            print(src_list)
+            print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
             for src in src_list:
                 file_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/" + app_conf["s3_conf"]["staging_dir"] + "/" + src
                 src_df = spark.sql("select * from parquet.'{}'".format(file_path))
