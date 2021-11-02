@@ -48,18 +48,18 @@ if __name__ == '__main__':
             jdbc_url = ut.get_redshift_jdbc_url(app_secret)
             print('Creating REGIS_DIM table data++++++++++++++++++++')
             print(jdbc_url)
-            #ut.write_to_redshift(regis_dim_df.coalesce(1),
-            #                     jdbc_url,
-            #                     "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/temp",
-            #                     tgt_conf['tableName'])
+            ut.write_to_redshift(regis_dim_df.coalesce(1),
+                                 jdbc_url,
+                                 "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/temp",
+                                 tgt_conf['tableName'])
 
-            regis_dim_df.write \
-                .format("io.github.spark_redshift_community.spark.redshift") \
-                .option("url", jdbc_url) \
-                .option("tempdir", "s3n://data-stg-dir/staging/temp") \
-                .option("forward_spark_s3_credentials", "true") \
-                .option("dbtable", "DWH.REGIS_DIM") \
-                .mode("append").save()
+            #regis_dim_df.write \
+            #    .format("io.github.spark_redshift_community.spark.redshift") \
+            #    .option("url", jdbc_url) \
+            #    .option("tempdir", "s3n://data-stg-dir/staging/temp") \
+            #    .option("forward_spark_s3_credentials", "true") \
+            #    .option("dbtable", "DWH.REGIS_DIM") \
+            #    .mode("append").save()
 
             print('Creating REGIS_DIM table data+++========+++++++++')
 
