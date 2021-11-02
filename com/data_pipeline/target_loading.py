@@ -58,7 +58,7 @@ if __name__ == '__main__':
                 .option("url", jdbc_url) \
                 .option("tempdir", "s3a://data-stg-dir/staging/temp") \
                 .option("forward_spark_s3_credentials", "true") \
-                .option("dbtable", "DWH.REGIS_DIM") \
+                .option("dbtable", "PUBLIC.REGIS_DIM") \
                 .mode("append").save()
 
             print('Creating REGIS_DIM table data+++========+++++++++')
