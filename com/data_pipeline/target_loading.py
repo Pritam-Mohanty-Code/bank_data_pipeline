@@ -56,7 +56,7 @@ if __name__ == '__main__':
             regis_dim_df.write \
                 .format("io.github.spark_redshift_community.spark.redshift") \
                 .option("url", jdbc_url) \
-                .option("tempdir", "s3a://data-stg-dir/staging/temp") \
+                .option("tempdir", "s3n://data-stg-dir/staging/temp") \
                 .option("forward_spark_s3_credentials", "true") \
                 .option("dbtable", "PUBLIC.REGIS_DIM") \
                 .mode("append").save()
