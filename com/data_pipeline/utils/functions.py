@@ -39,5 +39,5 @@ def write_to_redshift(df, jdbc_url, s3_temp_path, table_name):
         .option("tempdir", s3_temp_path) \
         .option("forward_spark_s3_credentials", "true") \
         .option("dbtable", table_name) \
-        .mode("append") \
-        .save()
+        .mode("append").save()
+
